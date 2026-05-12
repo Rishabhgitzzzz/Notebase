@@ -1,1 +1,1 @@
-{"root":["./src/env.ts","./src/index.ts","./src/config/db.ts","./src/middlewares/auth.ts","./src/models/content.model.ts","./src/models/user.model.ts","./src/types/express.d.ts"],"version":"6.0.2"}
+{"root":["./src/env.ts","./src/index.ts","./src/middlewares/auth.ts","./src/models/content.model.ts","./src/models/link.models.ts","./src/models/user.model.ts","./src/types/express.d.ts","./src/utils/db.ts","./src/utils/generatehash.ts"],"version":"6.0.2"}
