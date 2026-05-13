@@ -2,16 +2,33 @@ const TwitterIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="#000000"
-      className=""
-      viewBox="0 0 16 16"
-      id="Twitter-X--Streamline-Bootstrap"
-      height="20"
-      width="20"
+      fill="none"
+      viewBox="0 0 24 24"
+      id="X-Twitter-Logo--Streamline-Logos"
+      height="23"
+      width="24"
+      className=" hover:fill-black transition-colors duration-200"
     >
-      <desc>Twitter X Streamline Icon: https://streamlinehq.com</desc>
+      <desc>X Twitter Logo Streamline Icon: https://streamlinehq.com</desc>
       <path
-        d="M12.6 0.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867 -5.07 -4.425 5.07H0.316l5.733 -6.57L0 0.75h5.063l3.495 4.633L12.601 0.75Zm-0.86 13.028h1.36L4.323 2.145H2.865z"
+        stroke="#000000"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M17.2705 22.464 1.5 1.53589h5.22951L22.5 22.464h-5.2295Z"
+        stroke-width="1"
+      ></path>
+      <path
+        stroke="#000000"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m21.7578 1.53589 -8.313 8.91461"
+        stroke-width="1"
+      ></path>
+      <path
+        stroke="#000000"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m2.24207 22.464 8.30673 -8.9078"
         stroke-width="1"
       ></path>
     </svg>
