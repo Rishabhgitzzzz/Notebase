@@ -19,17 +19,17 @@ const TwitterIcon = () => {
       ></path>
       <path
         stroke="#000000"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="m21.7578 1.53589 -8.313 8.91461"
-        stroke-width="1"
+        strokeWidth="1"
       ></path>
       <path
         stroke="#000000"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="m2.24207 22.464 8.30673 -8.9078"
-        stroke-width="1"
+        strokeWidth="1"
       ></path>
     </svg>
   );

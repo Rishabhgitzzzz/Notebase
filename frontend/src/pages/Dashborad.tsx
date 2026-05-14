@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import PlusIcon from "../icons/PlusIcon";
 import ShareIcon from "../icons/ShareIcon";
 import Card from "../components/Card";
+import LogOutButton from "../components/LogOutButton";
 
 const Dashborad = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +19,7 @@ const Dashborad = () => {
             onClose={() => setShowModal(false)}
           />
         )}
-        <div className="flex justify-end ">
+        <div className="flex justify-end items-center">
           <Button
             variants="primary"
             size="md"
@@ -35,6 +36,8 @@ const Dashborad = () => {
             title="Share brain"
             starticon={<ShareIcon size="md" />}
           />
+
+          <LogOutButton />
         </div>
 
         <div className="flex">

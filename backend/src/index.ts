@@ -12,13 +12,14 @@ import { ContentModel } from "./models/content.model.js";
 import mongoose, { Types } from "mongoose";
 import { LinkModel } from "./models/link.models.js";
 import { generateHash } from "./utils/generateHash.js";
+import cors from "cors";
 
 const app = express();
 
 const PORT = env.PORT;
 
 db();
-
+app.use(cors());
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 

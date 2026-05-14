@@ -1,13 +1,24 @@
 import { useRef } from "react";
 import Logo from "../icons/Logo";
+import { authAPI } from "../api/axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const nav = useNavigate();
 
-  function handleSignUp() {
+  async function handleSignUp() {
     const username = usernameRef.current?.value;
     const password = passwordRef.current?.value;
+
+    if (!username || !password) return;
+    try {
+      await authAPI.signup({ username, password });
+      nav("/login");
+    } catch (err) {
+      console.error("Signup failed:", err);
+    }
   }
 
   return (
@@ -29,7 +40,6 @@ const SignUp = () => {
         <p className="text-lg font-medium mb-6">Create account </p>
 
         <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 mb-3 bg-gray-50 focus-within:border-indigo-400 focus-within:bg-white">
-          {/* user icon */}
           <input
             ref={usernameRef}
             type="text"
@@ -39,7 +49,6 @@ const SignUp = () => {
         </div>
 
         <div className="flex items-center gap-2 border border-gray-200 rounded-xl px-3 mb-4 bg-gray-50 focus-within:border-indigo-400 focus-within:bg-white">
-          {/* lock icon */}
           <input
             ref={passwordRef}
             type="password"
@@ -52,14 +61,14 @@ const SignUp = () => {
           onClick={handleSignUp}
           className="w-full h-12 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl font-medium text-sm transition-colors"
         >
-          Login
+          Signup
         </button>
 
         <p className="text-center text-sm text-gray-400 mt-4">
           Already have an account?{" "}
-          <a href="/signup" className="text-indigo-500 font-medium">
+          <Link to="/signin" className="text-indigo-500 font-medium">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>
