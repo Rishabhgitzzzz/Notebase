@@ -113,9 +113,24 @@ app.post("/api/v1/signin", async (req, res) => {
 });
 
 app.post("/api/v1/content", auth, async (req, res) => {
-  //validation
   try {
-    const { link, title, type } = req.body;
+    const zodContentSchema = z.object({
+      link: z.string().url({ message: "Must be a valid URL" }),
+      title: z.string().min(1, { message: "Title is required" }).max(50),
+      type: z.enum(["youtube", "tweet", "docs", "link"], {
+        message: "Type must be youtube, tweet, docs or link",
+      }),
+    });
+
+    const validation = zodContentSchema.safeParse(req.body);
+
+    if (!validation.success) {
+      return res.status(400).json({
+        msg: "Invalid inputs",
+      });
+    }
+
+    const { link, title, type } = validation.data;
 
     const content = await ContentModel.create({
       link,
@@ -145,6 +160,7 @@ app.get("/api/v1/content", auth, async (req, res) => {
       content,
     });
   } catch (error) {
+    console.error("Error:", error);
     res.status(500).json({
       msg: "Server error",
     });
@@ -153,11 +169,14 @@ app.get("/api/v1/content", auth, async (req, res) => {
 
 app.delete("/api/v1/content", auth, async (req, res) => {
   try {
-    const contentId = req.body.contentId; // or req.query.id
+    const contentId = req.body.contentId;
 
+    if (!req.userId) {
+      return res.status(401).json({ msg: "Unauthorized" });
+    }
     await ContentModel.deleteOne({
       _id: contentId,
-      userId: req.userId,
+      userID: req.userId,
     });
 
     res.json({ message: "Deleted successfully" });

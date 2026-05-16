@@ -1,5 +1,7 @@
+import { useRef, useState } from "react";
 import CrossIcon from "../icons/CrossIcon";
 import Inputbox from "./Inputbox";
+import { contentAPI } from "../api/axios";
 
 interface modalProps {
   modalStatus: boolean;
@@ -7,6 +9,19 @@ interface modalProps {
 }
 
 const CreateContentModal = ({ onClose }: modalProps) => {
+  const titleRef = useRef<HTMLInputElement>(null);
+  const linkRef = useRef<HTMLInputElement>(null);
+  const [type, setType] = useState("");
+
+  async function addContent() {
+    const title = titleRef.current?.value;
+    const link = linkRef.current?.value;
+
+    if (!title || !link) return;
+
+    await contentAPI.postContent({ title, link, type });
+  }
+
   return (
     <div className=" h-screen w-full fixed inset-0 bg-black/50  flex justify-center items-center">
       <div className="bg-white w-96 h-80 p-4 rounded-2xl">
@@ -15,16 +30,17 @@ const CreateContentModal = ({ onClose }: modalProps) => {
             <CrossIcon />
           </button>
         </div>
+
         <div>
-          <h2 className="text-lg font-semibold mb-4 text-gray-700">
+          <h2 className="text-lg font-semibold mb-4 text-gray-700 text-center ">
             Add Content
           </h2>
 
-          <Inputbox placeholder="Title" />
-          <Inputbox placeholder="Link" />
+          <Inputbox ref={titleRef} placeholder="Title" />
+          <Inputbox ref={linkRef} placeholder="Link" />
           <select
-            // value={type}
-            // onChange={(e) => setType(e.target.value)}
+            value={type}
+            onChange={(e) => setType(e.target.value)}
             className="w-full border border-gray-200 rounded-md px-3 py-2 mb-4 text-sm outline-none focus:border-purple-400"
           >
             <option value="" disabled>
@@ -36,10 +52,10 @@ const CreateContentModal = ({ onClose }: modalProps) => {
 
           <button
             onClick={() => {
-              // onSubmit(title, link, type);
+              addContent();
               onClose();
             }}
-            className="w-full bg-purple-600 text-white rounded-md py-2 text-sm font-medium hover:bg-purple-700"
+            className="w-full h-12 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl font-medium text-sm transition-colors"
           >
             Submit
           </button>

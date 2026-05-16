@@ -6,9 +6,11 @@ import PlusIcon from "../icons/PlusIcon";
 import ShareIcon from "../icons/ShareIcon";
 import Card from "../components/Card";
 import LogOutButton from "../components/LogOutButton";
+import UseContent from "../hooks/UseContent";
 
 const Dashborad = () => {
   const [showModal, setShowModal] = useState(false);
+  const content = UseContent();
   return (
     <div>
       <Sidebar />
@@ -41,17 +43,9 @@ const Dashborad = () => {
         </div>
 
         <div className="flex">
-          <Card
-            title="First Tweet"
-            type="tweet"
-            link="https://x.com/nandini__bagga/status/2053012195651559651"
-          />
-
-          <Card
-            title="harkirat pod"
-            type="youtube"
-            link="https://www.youtube.com/watch?v=xSt5NJhG5tE"
-          />
+          {content.map(({ title, type, link, _id }) => (
+            <Card key={_id} _id={_id} title={title} type={type} link={link} />
+          ))}
         </div>
       </div>
     </div>

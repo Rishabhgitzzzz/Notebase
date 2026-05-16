@@ -20,7 +20,7 @@ const Login = () => {
       const res = await authAPI.login({ username, password });
       const jwt = res.data.token;
       login(jwt);
-      nav("/dashboard");
+      nav("/");
     } catch (err) {
       console.error("Login failed:", err);
     }

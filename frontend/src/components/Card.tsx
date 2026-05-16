@@ -2,14 +2,16 @@ import { useEffect, useRef } from "react";
 import DeleteIcon from "../icons/DeleteIcon";
 import LinkIcon from "../icons/LinkIcon";
 import ShareIcon from "../icons/ShareIcon";
+import { contentAPI } from "../api/axios";
 
 interface cardprops {
   title: string;
-  type: "tweet" | "youtube";
+  type: string;
   link: string;
+  _id: string;
 }
 
-const Card = ({ title, type, link }: cardprops) => {
+const Card = ({ title, type, link, _id }: cardprops) => {
   const tweetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,6 +31,12 @@ const Card = ({ title, type, link }: cardprops) => {
     // }
   }, []);
 
+  async function handleDelete() {
+    if (!_id) return;
+    await contentAPI.deleteContent({ contentId: _id });
+    window.location.reload();
+  }
+
   return (
     <div className="m-2 p-3 w-72 h-64 border border-gray-200 bg-white shadow-sm rounded-md flex flex-col">
       {/* Header — fixed height, never shrinks */}
@@ -39,7 +47,9 @@ const Card = ({ title, type, link }: cardprops) => {
         </div>
         <div className="flex gap-2 text-gray-500">
           <ShareIcon size="md" />
-          <DeleteIcon />
+          <button className="cursor-pointer" onClick={handleDelete}>
+            <DeleteIcon />
+          </button>
         </div>
       </div>
 
