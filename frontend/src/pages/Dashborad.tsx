@@ -42,7 +42,7 @@ const Dashborad = () => {
           <LogOutButton />
         </div>
 
-        <div className="flex">
+        <div className="flex gap-4 flex-wrap">
           {content.map(({ title, type, link, _id }) => (
             <Card key={_id} _id={_id} title={title} type={type} link={link} />
           ))}

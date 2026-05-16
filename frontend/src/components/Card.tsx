@@ -37,6 +37,15 @@ const Card = ({ title, type, link, _id }: cardprops) => {
     window.location.reload();
   }
 
+  const getYoutubeEmbedUrl = (url: string) => {
+    try {
+      const videoId = new URL(url).searchParams.get("v");
+      return `https://www.youtube.com/embed/${videoId}`;
+    } catch {
+      return url;
+    }
+  };
+
   return (
     <div className="m-2 p-3 w-72 h-64 border border-gray-200 bg-white shadow-sm rounded-md flex flex-col">
       {/* Header — fixed height, never shrinks */}
@@ -59,7 +68,7 @@ const Card = ({ title, type, link, _id }: cardprops) => {
             className="w-full h-48 mt-3"
             width="560"
             height="315"
-            src={link.replace("watch?v=", "embed/")}
+            src={getYoutubeEmbedUrl(link)}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer;
